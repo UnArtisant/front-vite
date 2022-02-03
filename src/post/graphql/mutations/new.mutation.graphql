@@ -1,0 +1,6 @@
+mutation newPost($title: String!, $text: String!) {
+    createPost(options: { title: $title, text: $text }) {
+        _id
+        id
+    }
+}

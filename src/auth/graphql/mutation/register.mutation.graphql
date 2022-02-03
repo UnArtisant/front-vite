@@ -1,0 +1,6 @@
+mutation Register($username : String!, $password: String!) {
+    register( params: {username: $username, password: $password}) {
+        user {_id, id, username, access_token}
+        errors {field, message}
+    }
+}

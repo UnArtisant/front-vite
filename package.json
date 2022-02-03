@@ -1,0 +1,45 @@
+{
+  "name": "front-vite",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "gen": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "@graphql-codegen/typescript-urql": "^3.4.2",
+    "@headlessui/react": "^1.4.3",
+    "@heroicons/react": "^1.0.5",
+    "@hookform/resolvers": "^2.8.8",
+    "@tailwindcss/forms": "^0.4.0",
+    "@urql/devtools": "^2.0.3",
+    "@urql/exchange-auth": "^0.1.7",
+    "@urql/exchange-graphcache": "^4.3.6",
+    "autoprefixer": "^10.4.2",
+    "cookie": "^0.4.1",
+    "date-fns": "^2.28.0",
+    "graphql": "^16.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "postcss": "^8.4.5",
+    "react": "^17.0.2",
+    "react-cookie": "^4.1.1",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.25.1",
+    "react-hot-toast": "^2.2.0",
+    "react-router-dom": "^6.2.1",
+    "tailwindcss": "^3.0.17",
+    "urql": "^2.0.6",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.4.0",
+    "@graphql-codegen/typescript": "2.4.2",
+    "@graphql-codegen/typescript-operations": "2.2.2",
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "@vitejs/plugin-react": "^1.0.7",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.2"
+  }
+}
