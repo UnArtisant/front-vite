@@ -30,6 +30,7 @@ export type Mutation = {
   login: UserResponse;
   logout: Scalars['Boolean'];
   register: UserResponse;
+  vote: Scalars['Boolean'];
 };
 
 
@@ -50,6 +51,18 @@ export type MutationLoginArgs = {
 
 export type MutationRegisterArgs = {
   params: UsernamePasswordInput;
+};
+
+
+export type MutationVoteArgs = {
+  postId: Scalars['Int'];
+  value: Scalars['Int'];
+};
+
+export type PaginatedPost = {
+  __typename?: 'PaginatedPost';
+  hasMore: Scalars['Boolean'];
+  posts: Array<Post>;
 };
 
 export type Post = {
@@ -73,7 +86,7 @@ export type PostInput = {
 export type Query = {
   __typename?: 'Query';
   post?: Maybe<Post>;
-  posts: Array<Post>;
+  posts: PaginatedPost;
   user: User;
 };
 
@@ -145,13 +158,21 @@ export type NewPostMutationVariables = Exact<{
 
 export type NewPostMutation = { __typename?: 'Mutation', createPost: { __typename?: 'Post', _id: number, id: string } };
 
+export type VoteMutationVariables = Exact<{
+  value: Scalars['Int'];
+  postId: Scalars['Int'];
+}>;
+
+
+export type VoteMutation = { __typename?: 'Mutation', vote: boolean };
+
 export type PostsQueryVariables = Exact<{
   limit: Scalars['Int'];
   offset?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type PostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', _id: number, id: string, title: string, textSnippet: string, points: number, createdAt: any, updatedAt: any, user: { __typename?: 'User', _id: number, username: string, id: string } }> };
+export type PostsQuery = { __typename?: 'Query', posts: { __typename?: 'PaginatedPost', hasMore: boolean, posts: Array<{ __typename?: 'Post', _id: number, id: string, title: string, points: number, createdAt: any, updatedAt: any, textSnippet: string, user: { __typename?: 'User', _id: number, username: string, id: string } }> } };
 
 
 export const LoginDocument = gql`
@@ -228,21 +249,33 @@ export const NewPostDocument = gql`
 export function useNewPostMutation() {
   return Urql.useMutation<NewPostMutation, NewPostMutationVariables>(NewPostDocument);
 };
+export const VoteDocument = gql`
+    mutation Vote($value: Int!, $postId: Int!) {
+  vote(value: $value, postId: $postId)
+}
+    `;
+
+export function useVoteMutation() {
+  return Urql.useMutation<VoteMutation, VoteMutationVariables>(VoteDocument);
+};
 export const PostsDocument = gql`
     query Posts($limit: Int!, $offset: Int) {
   posts(limit: $limit, offset: $offset) {
-    _id
-    id
-    title
-    textSnippet
-    points
-    createdAt
-    updatedAt
-    user {
+    posts {
       _id
-      username
       id
+      title
+      points
+      createdAt
+      updatedAt
+      textSnippet
+      user {
+        _id
+        username
+        id
+      }
     }
+    hasMore
   }
 }
     `;

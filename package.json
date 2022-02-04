@@ -27,6 +27,7 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.25.1",
     "react-hot-toast": "^2.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.2.1",
     "tailwindcss": "^3.0.17",
     "urql": "^2.0.6",
