@@ -8,6 +8,7 @@ import cookie from "cookie";
 import {USER_COOKIES} from "../../auth/constant/security.constant";
 import {offsetPagination} from "../../post/helpers/offesetPagination";
 import {createPost} from "../../post/graphql/cache/createPost";
+import {vote} from "../../post/graphql/cache/vote";
 
 const token = document.cookie ? cookie.parse(document.cookie)?.[USER_COOKIES] : null
 
@@ -33,7 +34,8 @@ export const client = createClient({
                     logout: logoutCache,
                     login: loginCache,
                     register: registerCache,
-                    createPost: createPost
+                    createPost: createPost,
+                    vote: vote
                 }
             }
         }),

@@ -3,26 +3,26 @@ import {Menu, Transition} from '@headlessui/react'
 import {CodeIcon, DotsVerticalIcon, FlagIcon, StarIcon} from '@heroicons/react/solid'
 import {classNames} from "../../global/helpers/className";
 import { formatDistance, subDays } from 'date-fns'
-import {useVoteMutation} from "../../generated/graphql";
+import {PostsQuery, useVoteMutation} from "../../generated/graphql";
 import cookie from "cookie";
 import {USER_COOKIES} from "../../auth/constant/security.constant";
 
 interface PostCardProps {
-    post: any
+    post: PostsQuery["posts"]["posts"][0]
 }
 
 export default function PostCard({post}: PostCardProps) {
     const [,vote] = useVoteMutation()
     const user = cookie.parse(document.cookie)?.[USER_COOKIES]
-    const upVote = () => {
-        vote({
+    const upVote = async () => {
+        await vote({
             postId: post._id,
             value: 1
         })
     }
 
-    const downVote = () => {
-        vote({
+    const downVote = async () => {
+        await vote({
             postId: post._id,
             value: -1
         })
